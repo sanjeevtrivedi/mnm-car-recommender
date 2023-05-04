@@ -20,7 +20,8 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=maven-build /customjre $JAVA_HOME
 
 RUN apk add dumb-init && \
-    apk add --update openssl && \
+    apk del openssl && \
+    rm -rf /var/cache/apk/* && \
     mkdir /home/app && \
 	addgroup --system javauser && \
 	adduser -S -s /bin/false -G javauser javauser && \
